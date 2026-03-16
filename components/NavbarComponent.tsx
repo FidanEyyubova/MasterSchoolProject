@@ -17,15 +17,16 @@ import {
   DropdownItem,
 } from "@heroui/react";
 import Image from "next/image";
-import { logo, navLinks } from "@/constants/data";
-import ThemeToggle from "../hooks/theme/ThemeToggle";
-import { Language, useLanguage } from "../hooks/language/useLanguage";
+import { navLinks } from "@/constants/data";
+import ThemeToggle, { useTheme } from "../hooks/theme/ThemeToggle";
+import { Language, useLanguage } from "@/hooks/language/LanguageContext";
 
 export default function ResponsiveNavbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
 
   const { lang, changeLanguage } = useLanguage();
+  const { logo } = useTheme();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -39,7 +40,7 @@ export default function ResponsiveNavbar() {
       { threshold: 0.6 },
     );
 
-    navLinks[lang].forEach((link) => {
+    navLinks[lang as keyof typeof navLinks]?.forEach((link) => {
       const element = document.getElementById(link.href.replace("#", ""));
       if (element) observer.observe(element);
     });
@@ -62,7 +63,7 @@ export default function ResponsiveNavbar() {
       </NavbarContent>
 
       <NavbarContent className="hidden md:flex gap-4 lg:gap-8" justify="center">
-        {navLinks[lang].map((link) => {
+        {navLinks[lang as keyof typeof navLinks]?.map((link) => {
           const sectionId = link.href.replace("#", "");
           const isActive = activeSection === sectionId;
           return (
@@ -94,7 +95,7 @@ export default function ResponsiveNavbar() {
             <DropdownTrigger>
               <Button
                 size="sm"
-                className="bg-[#525FE1] text-white min-w-15 h-8 px-0"
+                className="bg-linear-to-r from-[#3d4adc] to-[#9aa2fa] font-semibold text-white min-w-15 h-8 px-0"
                 disableRipple
               >
                 {lang.toUpperCase()}
@@ -122,7 +123,7 @@ export default function ResponsiveNavbar() {
       </NavbarContent>
 
       <NavbarMenu className="pt-6">
-        {navLinks[lang].map((link, index) => (
+        {navLinks[lang as keyof typeof navLinks]?.map((link, index) => (
           <NavbarMenuItem key={`${link.name}-${index}`}>
             <Link
               className="w-full text-xl py-4"

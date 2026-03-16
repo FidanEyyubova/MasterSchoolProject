@@ -1,12 +1,20 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import CardContainer from "./card/CardContainer";
-import { Language, useLanguage } from "../hooks/language/useLanguage";
+import { Language, useLanguage } from "@/hooks/language/LanguageContext";
 import { capTextByLang } from "@/constants/data";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const ServicesPage = () => {
   const { lang } = useLanguage();
   const data = capTextByLang[lang as Language][0];
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      once: false,
+    });
+  }, []);
 
   const firstSpaceIndex = data.capTitle.indexOf(" ");
   const firstWord = data.capTitle.slice(0, firstSpaceIndex);
@@ -15,6 +23,7 @@ const ServicesPage = () => {
   return (
     <div
       className="flex flex-col items-center justify-center w-full px-4 pt-10 pb-10"
+      data-aos="fade-down"
       id="services"
     >
       <div className="max-w-lg flex flex-col items-center text-center gap-4">

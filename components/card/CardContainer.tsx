@@ -1,7 +1,7 @@
 "use client";
 import { servicesByLang } from "@/constants/data";
+import { Language, useLanguage } from "@/hooks/language/LanguageContext";
 import { Card, CardHeader, CardBody } from "@heroui/react";
-import { Language, useLanguage } from "../../hooks/language/useLanguage";
 
 export default function CardContainer() {
   const { lang } = useLanguage();
@@ -11,18 +11,16 @@ export default function CardContainer() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pt-5">
       {service.map((item) => (
-        <Card
-          key={item.id}
-          style={
-            {
-              "--hover-bg": item.color,
-              "--hover-border": item.color,
-            } as React.CSSProperties
-          }
-          className="max-w-full h-45 cursor-pointer border-2 border-transparent transition-all duration-300 group overflow-hidden
-                     hover:bg-(--hover-bg)
-                     hover:border-(--hover-border)"
-        >
+       <Card
+  key={item.id}
+  style={
+    {
+      "--hover-border": item.color,
+    } as React.CSSProperties
+  }
+  className="max-w-full h-45 cursor-pointer  transition-all duration-300 group overflow-hidden
+  hover:bg-linear-to-r hover:from-[#3d4adc] hover:to-[#9aa2fa]"
+>
           <div className="h-full flex flex-col justify-between px-2">
             <CardHeader className="flex items-center gap-3">
               <div

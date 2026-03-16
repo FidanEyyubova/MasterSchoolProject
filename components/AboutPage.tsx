@@ -1,12 +1,20 @@
 "use client";
 import { aboutByLang, masterPic } from "@/constants/data";
 import Image from "next/image";
-import { Language, useLanguage } from "../hooks/language/useLanguage";
+import { Language, useLanguage } from "@/hooks/language/LanguageContext";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { useEffect } from "react";
 
 const AboutPage = () => {
   const { lang } = useLanguage();
   const data = aboutByLang[lang as Language][0];
-
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      once: false,
+    });
+  }, []);
   if (!data) return null;
 
   const firstPart = data.titleOne.slice(0, 16);
@@ -15,7 +23,7 @@ const AboutPage = () => {
   const lastPart = data.titleOne.slice(commaIndex);
 
   return (
-    <div className="w-full">
+    <div className="w-full" data-aos="fade-down">
       <div className="container mx-auto px-4 pt-0 lg:pt-16 pb-10 flex flex-col-reverse lg:flex-row items-center justify-center gap-10 lg:gap-16">
         <div className="w-full max-w-100 lg:max-w-113">
           <Image

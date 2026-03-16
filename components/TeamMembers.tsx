@@ -1,7 +1,7 @@
 "use client";
 import { teamTextByLang } from "@/constants/data";
 import TeamSlider from "./card/CardContainerTwo";
-import { Language, useLanguage } from "../hooks/language/useLanguage";
+import { Language, useLanguage } from "@/hooks/language/LanguageContext";
 
 const TeamMembers = () => {
   const { lang } = useLanguage();

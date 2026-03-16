@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import { Poppins, Geist } from "next/font/google";
 import "./globals.css";
+import "animate.css";
 import NavbarComponent from "@/components/NavbarComponent";
 import ScrollToTopButton from "@/components/scroll/ScrollToTopButton";
 import { ToastProvider } from "@heroui/toast";
 import Footer from "@/components/Footer";
+import { LanguageProvider } from "@/hooks/language/LanguageContext";
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
 const poppins = Poppins({
@@ -49,11 +51,13 @@ export default function RootLayout({
         />
       </head>
       <body className="font-sans antialiased bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-300">
-        <NavbarComponent />
-        <ToastProvider placement="top-right" toastOffset={20} />
-        <main>{children}</main>
-        <ScrollToTopButton />
-        <Footer />
+        <LanguageProvider>
+          <NavbarComponent />
+          <ToastProvider placement="top-right" toastOffset={20} />
+          <main>{children}</main>
+          <ScrollToTopButton />
+          <Footer />
+        </LanguageProvider>
       </body>
     </html>
   );

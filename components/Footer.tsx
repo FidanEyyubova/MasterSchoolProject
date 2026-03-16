@@ -2,17 +2,19 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { footerByLang, logo } from "@/constants/data";
-import { Language, useLanguage } from "../hooks/language/useLanguage";
+import { footerByLang } from "@/constants/data";
+import { useTheme } from "@/hooks/theme/ThemeToggle";
+import { Language, useLanguage } from "@/hooks/language/LanguageContext";
 
 const Footer = () => {
   const { lang } = useLanguage();
   const data = footerByLang[lang as Language];
+  const { logo } = useTheme();
 
   if (!data) return null;
 
   return (
-    <footer className="w-full bg-white dark:bg-[#12172e] border-t border-gray-100 dark:border-gray-800">
+    <footer className="w-full bg-white dark:bg-black border-t border-gray-100 dark:border-gray-800">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-x-10 gap-y-12 py-12 md:py-16">

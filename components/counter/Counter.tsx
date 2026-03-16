@@ -2,7 +2,7 @@ import React from "react";
 import { useInView } from "react-intersection-observer";
 import CountUp from "react-countup";
 import { counterByLang } from "@/constants/data";
-import { Language, useLanguage } from "../../hooks/language/useLanguage";
+import { Language, useLanguage } from "@/hooks/language/LanguageContext";
 
 const Counter: React.FC = () => {
   const { lang } = useLanguage();

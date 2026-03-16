@@ -1,18 +1,82 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { addressByLang, addressTextByLang } from "@/constants/data";
 import Link from "next/link";
 import Image from "next/image";
-import { MapPin, Phone } from "lucide-react";
-import { Splide, SplideSlide } from "@splidejs/react-splide";
-import "@splidejs/react-splide/css";
-import { Language, useLanguage } from "../hooks/language/useLanguage";
+import { MapPin, Phone, ChevronLeft, ChevronRight } from "lucide-react";
+import { Language, useLanguage } from "@/hooks/language/LanguageContext";
+import AOS from "aos";
+import "aos/dist/aos.css";
+
+const CustomSlider = ({
+  images,
+  title,
+}: {
+  images: string[];
+  title: string;
+}) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const prev = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
+  };
+
+  const next = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setCurrentIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
+  };
+
+  useEffect(() => {
+    if (images.length <= 1) return;
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % images.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [images.length]);
+
+  return (
+    <div className="relative w-full h-full group/slider overflow-hidden">
+      {images.map((img, idx) => (
+        <Image
+          key={idx}
+          src={img}
+          alt={`${title}-${idx}`}
+          fill
+          className={`object-cover transition-opacity duration-700 ${
+            idx === currentIndex ? "opacity-100" : "opacity-0"
+          }`}
+          sizes="(max-width: 768px) 100vw, 224px"
+        />
+      ))}
+
+      {}
+      {images.length > 1 && (
+        <>
+          <button
+            onClick={prev}
+            className="cursor-pointer absolute left-2 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-1 rounded-full opacity-0 group-hover/slider:opacity-100 transition"
+          >
+            <ChevronLeft size={16} />
+          </button>
+          <button
+            onClick={next}
+            className="cursor-pointer absolute right-2 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-1 rounded-full opacity-0 group-hover/slider:opacity-100 transition"
+          >
+            <ChevronRight size={16} />
+          </button>
+        </>
+      )}
+    </div>
+  );
+};
 
 const LocationPage = () => {
   const { lang } = useLanguage();
-
   const langDataArray = addressTextByLang[lang as Language];
   const addressData = addressByLang[lang as Language];
+
   const langData = Array.isArray(langDataArray)
     ? langDataArray[0]
     : langDataArray;
@@ -23,11 +87,20 @@ const LocationPage = () => {
   const highlightedPart =
     lastSpaceIndex !== -1 ? title.slice(lastSpaceIndex) : title;
 
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      once: false,
+    });
+  }, []);
+
   return (
-    <div
-      className="w-full px-4 pt-10 pb-10 flex flex-col items-center"
+    <section
       id="address"
+      className="w-full px-4 py-16 flex flex-col items-center"
+      data-aos="fade-down"
     >
+      {}
       <div className="max-w-lg flex flex-col items-center text-center gap-4 mb-8">
         <h1 className="text-3xl md:text-[40px] font-bold leading-tight">
           {firstPart}
@@ -39,86 +112,52 @@ const LocationPage = () => {
         </p>
       </div>
 
-      <div className="w-full max-w-6xl py-3">
-        <Splide
-          options={{
-            type: "loop",
-            perPage: 2,
-            gap: "1.2rem",
-            autoplay: false,
-            arrows: true,
-            pagination: false,
-            breakpoints: {
-              1024: { perPage: 2 },
-              768: { perPage: 1 },
-            },
-          }}
-          aria-label="Filiallar Karuseli"
-        >
-          {addressData.map((item) => (
-            <SplideSlide key={item.id}>
-              <div className="cursor-pointer flex flex-col sm:flex-row items-center dark:bg-[#18181b] bg-white border-2 border-[#c4c1c1] dark:border-[#18181b] shadow-sm rounded-2xl hover:border-[#525FE1] hover:dark:border-[#525FE1] transition-all duration-300 h-auto sm:h-64 p-3">
-                {}
-                <div className="hidden sm:block w-full sm:w-48 md:w-60 h-64 sm:h-full shrink-0 overflow-hidden rounded-2xl relative">
-                  <Splide
-                    options={{
-                      type: "fade",
-                      rewind: true,
-                      arrows: false,
-                      pagination: false,
-                      autoplay: true,
-                      interval: 3000,
-                      drag: false,
-                      height: "100%",
-                    }}
-                    className="inner-splide h-full"
-                  >
-                    {item.addressImg.map((imgUrl, idx) => (
-                      <SplideSlide key={idx} className="h-full">
-                        <Image
-                          src={imgUrl}
-                          alt={`${item.title}-${idx}`}
-                          fill
-                          className="object-cover object-center rounded-xl"
-                          sizes="(max-width: 768px) 100vw, 240px"
-                        />
-                      </SplideSlide>
-                    ))}
-                  </Splide>
-                </div>
+      {}
+      <div className="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-6 mt-3">
+        {addressData.map((item, index) => (
+          <div
+            key={item.id}
+            className={`cursor-pointer group flex flex-col sm:flex-row overflow-hidden rounded-2xl bg-white dark:bg-[#18181b] border border-gray-200 dark:border-[#27272a] transition-all duration-300 hover:scale-[1.02] w-full`}
+          >
+            {}
+            <div className="relative w-full sm:w-56 h-48 sm:h-auto overflow-hidden shrink-0 bg-gray-100">
+              <CustomSlider images={item.addressImg} title={item.title} />
+            </div>
 
-                <div className="flex flex-col gap-2 p-4 w-full text-center sm:text-left">
-                  <h3 className="text-lg font-bold text-gray-800 dark:text-white truncate">
-                    {item.title}
-                  </h3>
-                  <div className="flex items-center justify-center sm:justify-start gap-1">
-                    <MapPin size={16} className="text-gray-500 shrink-0" />
-                    <p className="text-sm text-gray-500">
-                      {item.address.length > 30
-                        ? `${item.address.slice(0, 20)}...`
-                        : item.address}
-                    </p>
-                  </div>
-                  <a
-                    href={`tel:${item.phoneNum}`}
-                    className="flex items-center justify-center sm:justify-start gap-1 text-sm font-semibold text-[#525FE1] hover:underline"
-                  >
-                    <Phone size={14} />
-                    {item.phoneNum}
-                  </a>
-                  <Link
-                    href={`/locations/${item.id}`}
-                    className="text-sm font-bold mt-1 text-black hover:underline dark:text-white"
-                  >
-                    {lang === "az" ? "Ətraflı məlumat" : "Detailed info"}
-                  </Link>
+            {}
+            <div className="flex flex-col justify-between gap-3 p-5 w-full">
+              <div className="flex flex-col gap-2">
+                <h3 className="text-lg font-semibold text-gray-800 dark:text-white leading-tight">
+                  {item.title}
+                </h3>
+                <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400 text-sm">
+                  <MapPin size={14} className="shrink-0" />
+                  <span className="truncate">
+                    {item.address.length > 30
+                      ? `${item.address.slice(0, 30)}...`
+                      : item.address}
+                  </span>
                 </div>
+                <a
+                  href={`tel:${item.phoneNum}`}
+                  className="flex items-center gap-2 text-[#525FE1] font-medium text-sm hover:underline"
+                >
+                  <Phone size={14} />
+                  {item.phoneNum}
+                </a>
               </div>
-            </SplideSlide>
-          ))}
-        </Splide>
+
+              <Link
+                href={`/locations/${item.id}`}
+                className="w-fit text-xs font-semibold px-4 py-2 rounded-lg bg-[#525FE1] text-white hover:bg-[#3d47c7] transition"
+              >
+                {lang === "az" ? "Ətraflı məlumat" : "Detailed information"}
+              </Link>
+            </div>
+          </div>
+        ))}
       </div>
-    </div>
+    </section>
   );
 };
 

@@ -1,4 +1,5 @@
-import { Language } from "@/hooks/language/useLanguage";
+
+import { Language } from "@/hooks/language/LanguageContext";
 import {
   Book,
   Users,
@@ -15,8 +16,9 @@ import {
   MapPin,
   Clock,
 } from "lucide-react";
-export const logo = "/assets/logo.png";
-export const girl = "/assets/girl1.png";
+export const logoLight = "/assets/logo1.png";
+export const logoDark = "/assets/logo2.png";
+export const girl = "/assets/girl4.png";
 export const masterPic = "/assets/mezunmaster.png";
 
 //    ---NavLink---    //
@@ -176,7 +178,7 @@ export const servicesByLang: Record<Language, Service[]> = {
     {
       id: 1,
       title: "Magistratura",
-      color: "#9ba2f0",
+      color: "#3d4adc",
       icon: Book,
       description:
         "Magistratura hazırlığı 3 fənn üzrə tədris edilir: Məntiq, İnformatika, Xarici dil. Hər fənn həftədə 2 dəfə olmaqla 90 dəqiqə keçirilir.",
@@ -184,7 +186,7 @@ export const servicesByLang: Record<Language, Service[]> = {
     {
       id: 2,
       title: "Dövlət Qulluğu",
-      color: "#9ba2f0",
+      color: "#3d4adc",
       icon: Users,
       description:
         "Həftədə 2 dəfə, 90 dəqiqə olmaqla keçirilir. Hər həftə sonu sınaq imtahanları təşkil edilir.",
@@ -192,7 +194,7 @@ export const servicesByLang: Record<Language, Service[]> = {
     {
       id: 3,
       title: "Miq və Sertifikasiya",
-      color: "#9ba2f0",
+      color: "#3d4adc",
       icon: Laptop,
       description:
         "Dərslərimiz həftədə 2 dəfə, 1.5 saat olmaqla keçirilir. İlk dərs ödənişsiz sınaq dərsidir.",
@@ -200,7 +202,7 @@ export const servicesByLang: Record<Language, Service[]> = {
     {
       id: 4,
       title: "Abituriyent",
-      color: "#9ba2f0",
+      color: "#3d4adc",
       icon: GraduationCap,
       description:
         "Dərslərimiz həftədə 2 dəfə, 1.5 saat olmaqla keçirilir. İlk dərs ödənişsiz sınaq dərsidir.",
@@ -208,7 +210,7 @@ export const servicesByLang: Record<Language, Service[]> = {
     {
       id: 5,
       title: "Məktəbəqədər",
-      color: "#9ba2f0",
+      color: "#3d4adc",
       icon: Backpack,
       description:
         "Dərslərimiz həftədə 2 dəfə, 1.5 saat olmaqla keçirilir. İlk dərs ödənişsiz sınaq dərsidir.",
@@ -216,7 +218,7 @@ export const servicesByLang: Record<Language, Service[]> = {
     {
       id: 6,
       title: "İELTS",
-      color: "#9ba2f0",
+      color: "#3d4adc",
       icon: Headphones,
       description:
         "Həftədə 2 dəfə, 1.5 saatlıq dərslər və əlavə danışıq klubları. Hər ayın sonu imtahan keçirilir.",
@@ -226,7 +228,7 @@ export const servicesByLang: Record<Language, Service[]> = {
     {
       id: 1,
       title: "Магистратура",
-      color: "#9ba2f0",
+      color: "#3d4adc",
       icon: Book,
       description:
         "Подготовка к магистратуре по 3 предметам: Логика, Информатика, Иностр. язык. Занятия 2 раза в неделю по 90 минут.",
@@ -234,7 +236,7 @@ export const servicesByLang: Record<Language, Service[]> = {
     {
       id: 2,
       title: "Госслужба",
-      color: "#9ba2f0",
+      color: "#3d4adc",
       icon: Users,
       description:
         "Занятия 2 раза в неделю, 90 минут. Еженедельные пробные экзамены.",
@@ -242,7 +244,7 @@ export const servicesByLang: Record<Language, Service[]> = {
     {
       id: 3,
       title: "Миг и Сертификация",
-      color: "#9ba2f0",
+      color: "#3d4adc",
       icon: Laptop,
       description:
         "Занятия 2 раза в неделю по 1.5 часа. Первый урок бесплатный.",
@@ -250,7 +252,7 @@ export const servicesByLang: Record<Language, Service[]> = {
     {
       id: 4,
       title: "Абитуриент",
-      color: "#9ba2f0",
+      color: "#3d4adc",
       icon: GraduationCap,
       description:
         "Занятия 2 раза в неделю по 1.5 часа. Первый урок бесплатный.",
@@ -258,7 +260,7 @@ export const servicesByLang: Record<Language, Service[]> = {
     {
       id: 5,
       title: "Дошкольное",
-      color: "#9ba2f0",
+      color: "#3d4adc",
       icon: Backpack,
       description:
         "Занятия 2 раза в неделю по 1.5 часа. Первый урок бесплатный.",
@@ -266,7 +268,7 @@ export const servicesByLang: Record<Language, Service[]> = {
     {
       id: 6,
       title: "IELTS",
-      color: "#9ba2f0",
+      color: "#3d4adc",
       icon: Headphones,
       description:
         "Занятия 2 раза в неделю по 1.5 часа, разговорные клубы и ежемесячные экзамены.",
@@ -276,7 +278,7 @@ export const servicesByLang: Record<Language, Service[]> = {
     {
       id: 1,
       title: "Master's Degree",
-      color: "#9ba2f0",
+      color: "#3d4adc",
       icon: Book,
       description:
         "Preparation in 3 subjects: Logic, Informatics, Foreign language. Classes twice a week for 90 minutes.",
@@ -284,7 +286,7 @@ export const servicesByLang: Record<Language, Service[]> = {
     {
       id: 2,
       title: "Public Service",
-      color: "#9ba2f0",
+      color: "#3d4adc",
       icon: Users,
       description:
         "Classes twice a week for 90 minutes. Weekly mock exams included.",
@@ -292,28 +294,28 @@ export const servicesByLang: Record<Language, Service[]> = {
     {
       id: 3,
       title: "Miq & Certification",
-      color: "#9ba2f0",
+      color: "#3d4adc",
       icon: Laptop,
       description: "Classes twice a week for 1.5 hours. First lesson is free.",
     },
     {
       id: 4,
       title: "Abiturient",
-      color: "#9ba2f0",
+      color: "#3d4adc",
       icon: GraduationCap,
       description: "Classes twice a week for 1.5 hours. First lesson is free.",
     },
     {
       id: 5,
       title: "Preschool",
-      color: "#9ba2f0",
+      color: "#3d4adc",
       icon: Backpack,
       description: "Classes twice a week for 1.5 hours. First lesson is free.",
     },
     {
       id: 6,
       title: "IELTS",
-      color: "#9ba2f0",
+      color: "#3d4adc",
       icon: Headphones,
       description:
         "Twice a week for 1.5 hours, plus speaking clubs and monthly exams.",
@@ -403,7 +405,7 @@ export const team: TeamMember[] = [
   { id: 44, title: "Seymur Əliyev", img: "/team/team44.webp" },
   { id: 45, title: "Şəhriyar Kərimli", img: "/team/team45.webp" },
   { id: 46, title: "Səriyyə Ağalarova", img: "/team/team46.webp" },
-  { id: 47, title: "Sitara orucova", img: "/team/team47.jpg" },
+  { id: 47, title: "Sitara Orucova", img: "/team/team47.jpg" },
   { id: 48, title: "Tamerlan Alanlı", img: "/team/team48.webp" },
   { id: 49, title: "Turanə Ağayeva", img: "/team/team49.webp" },
   { id: 50, title: "Türkan İsmayılova", img: "/team/team50.webp" },
@@ -513,7 +515,7 @@ export interface AddressCap {
 export const addressTextByLang: Record<Language, AddressCap[]> = {
   az: [
     {
-      capTitle: "Filiallarımız",
+      capTitle: "Bizim Filiallarımız",
       capDesc: "Şəhərin müxtəlif nöqtələrində sizə xidmət göstəririk",
     },
   ],
@@ -1153,7 +1155,7 @@ export const contactTextByLang: Record<Language, any> = {
       workHours: "Рабочие часы",
       hours: "08:30 - 20:00",
       namePlaceholder: "Имя и Фамилия",
-      emailPlaceholder: "Email",
+      emailPlaceholder: "Электронная почта",
       phonePlaceholder: "Телефон",
       messagePlaceholder: "Ваше сообщение...",
       sendBtn: "Отправить",

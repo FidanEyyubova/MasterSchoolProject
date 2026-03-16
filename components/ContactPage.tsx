@@ -4,7 +4,7 @@ import emailjs from "@emailjs/browser";
 import { Clock, Mail, Phone } from "lucide-react";
 import { addToast } from "@heroui/toast";
 import { contactTextByLang } from "@/constants/data";
-import { Language, useLanguage } from "../hooks/language/useLanguage";
+import { Language, useLanguage } from "@/hooks/language/LanguageContext";
 
 const ContactPage = () => {
   const { lang } = useLanguage();

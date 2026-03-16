@@ -2,7 +2,7 @@
 
 import { applicant, capApplicantTextByLang } from "@/constants/data";
 import { Marquee } from "./ui/marquee";
-import { Language, useLanguage } from "../hooks/language/useLanguage";
+import { Language, useLanguage } from "@/hooks/language/LanguageContext";
 
 const ReviewCard = ({ img }: { img: string }) => {
   return (
@@ -33,12 +33,16 @@ const ApplicantPage = () => {
   return (
     <div className="dark:bg-[#020618] relative flex w-full flex-col items-center justify-center overflow-hidden py-10 bg-background">
       {}
-      <div className="max-w-lg flex flex-col items-center text-center gap-4 mb-10">
-        <h1 className="text-3xl md:text-[40px] font-bold leading-tight">
+      <div className="max-w-lg mx-auto flex flex-col items-center text-center gap-4 mb-10">
+        <h1 className="text-3xl md:text-[45px] font-bold leading-tight">
           {firstPart}
-          <span className="text-[#525FE1]">{highlightedPart}</span>
+          <span className="block text-[#525FE1] text-3xl md:text-[35px]">
+            {highlightedPart}
+          </span>
         </h1>
+
         <div className="bg-[#9ba2f0] h-2 w-40 rounded-2xl"></div>
+
         <p className="text-[#808080] text-base md:text-lg">{data.capDesc}</p>
       </div>
 

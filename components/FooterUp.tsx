@@ -2,7 +2,7 @@
 import { Button } from "@heroui/react";
 import React from "react";
 import { footerUpTextByLang } from "@/constants/data";
-import { Language, useLanguage } from "../hooks/language/useLanguage";
+import { Language, useLanguage } from "@/hooks/language/LanguageContext";
 
 const FooterUp = () => {
   const { lang } = useLanguage();

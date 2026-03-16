@@ -2,10 +2,19 @@
 
 import { partnersByLang, partnerTextByLang } from "@/constants/data";
 import Image from "next/image";
-import { Language, useLanguage } from "../hooks/language/useLanguage";
+import { Language, useLanguage } from "@/hooks/language/LanguageContext";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { useEffect } from "react";
 
 const PartnersPage = () => {
   const { lang } = useLanguage();
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      once: false,
+    });
+  }, []);
 
   const capData = partnerTextByLang[lang as Language]?.[0];
   const partnersList = partnersByLang[lang as Language];
@@ -17,7 +26,7 @@ const PartnersPage = () => {
   const highlightedPart = capData.capTitle.slice(lastSpaceIndex);
 
   return (
-    <div id="partners" className="py-16 mx-5">
+    <div id="partners" className="py-16 mx-5" data-aos="fade-down">
       <div className="container mx-auto px-4 flex flex-col items-center gap-12">
         {}
         <div className="flex flex-col items-center text-center gap-4 max-w-2xl">
